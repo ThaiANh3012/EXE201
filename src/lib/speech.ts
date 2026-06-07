@@ -10,19 +10,27 @@ export function speakText(text: string, opts: SpeakOptions = {}) {
   synth.cancel()
 
   const utter = new SpeechSynthesisUtterance(text)
-  utter.rate = opts.rate ?? 0.75
-  utter.pitch = opts.pitch ?? 1.2
+  utter.rate = opts.rate ?? 0.8
+  utter.pitch = opts.pitch ?? 1.0
   if (opts.lang) utter.lang = opts.lang
 
   // Try to pick a friendly voice if available
   try {
-    const voices = synth.getVoices()
-    const preferFemale = (v: SpeechSynthesisVoice) => /female|woman|girl|fem|female voice/i.test(v.name || '')
-    if (voices && voices.length) {
-      // prefer female voices
-      const preferred = voices.find(preferFemale) || voices.find((v) => /vi|vietnamese/i.test(v.lang)) || voices[0]
-      if (preferred) utter.voice = preferred
+    const voices = synth.getVoices() || []
+    const preferFemaleByName = (v: SpeechSynthesisVoice) => /natural|google|samantha|zira/i.test(v.name || '');
+
+    // Prefer voices that match requested language (if provided), then prefer female by name.
+    const langPrefix = opts.lang ? opts.lang.slice(0, 2).toLowerCase() : null
+    let candidates = voices
+    if (langPrefix) {
+      const matched = voices.filter((v) => (v.lang || '').toLowerCase().startsWith(langPrefix))
+      if (matched.length) candidates = matched
     }
+
+    let preferred = candidates.find(preferFemaleByName) || candidates[0]
+    // fallback: any female voice regardless of lang
+    if (!preferred) preferred = voices.find(preferFemaleByName) || voices[0]
+    if (preferred) utter.voice = preferred
   } catch (e) {
     // ignore
   }
@@ -30,8 +38,16 @@ export function speakText(text: string, opts: SpeakOptions = {}) {
   if (!synth.getVoices || synth.getVoices().length === 0) {
     const onVoices = () => {
       try {
-        const voices2 = synth.getVoices()
-        const preferred2 = voices2.find((v) => /female|woman|girl|fem/i.test(v.name || '')) || voices2[0]
+        const voices2 = synth.getVoices() || []
+        const preferFemaleByName = (v: SpeechSynthesisVoice) => /natural|google|samantha|zira/i.test(v.name || '');
+        const langPrefix = opts.lang ? opts.lang.slice(0, 2).toLowerCase() : null
+        let candidates = voices2
+        if (langPrefix) {
+          const matched = voices2.filter((v) => (v.lang || '').toLowerCase().startsWith(langPrefix))
+          if (matched.length) candidates = matched
+        }
+        let preferred2 = candidates.find(preferFemaleByName) || candidates[0]
+        if (!preferred2) preferred2 = voices2.find(preferFemaleByName) || voices2[0]
         if (preferred2) utter.voice = preferred2
       } catch (err) {
         // ignore

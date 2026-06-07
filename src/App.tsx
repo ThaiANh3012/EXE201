@@ -14,13 +14,25 @@ function App() {
     if (hash.startsWith('#id=')) {
       const idFromUrl = hash.replace('#id=', '')
       setModalId(idFromUrl)
+      // speak the word when the page is loaded directly with a hash (scan or reload)
+      const found = VOCAB.find((v) => v.id.toString() === idFromUrl)
+      if (found) {
+        try { stopSpeaking() } catch {}
+        try { speakText(found.word, { rate: 0.7, pitch: 1.2, lang: 'en-US' }) } catch {}
+      }
     }
     
     // Lắng nghe thêm sự kiện người dùng bấm "Back" / "Forward" trên trình duyệt
     const handleHashChange = () => {
       const currentHash = window.location.hash
       if (currentHash.startsWith('#id=')) {
-        setModalId(currentHash.replace('#id=', ''))
+        const newId = currentHash.replace('#id=', '')
+        setModalId(newId)
+        const found = VOCAB.find((v) => v.id.toString() === newId)
+        if (found) {
+          try { stopSpeaking() } catch {}
+          try { speakText(found.word, { rate: 0.7, pitch: 1.2, lang: 'en-US' }) } catch {}
+        }
       } else {
         setModalId(null)
       }
@@ -76,8 +88,9 @@ function App() {
                 className="modalClose"
                 onClick={() => {
                   setModalId(null)
+                  try { stopSpeaking() } catch {}
                   try {
-                    window.history.back()
+                    window.history.replaceState(null, '', window.location.pathname + window.location.search)
                   } catch (e) {
                     // ignore
                   }
@@ -86,9 +99,10 @@ function App() {
                 ✕
               </button>
               <VocabDetail id={modalId} onClose={() => {
-                setModalId(null)
-                try { window.history.back() } catch {}
-              }} />
+                  setModalId(null)
+                  try { stopSpeaking() } catch {}
+                  try { window.history.replaceState(null, '', window.location.pathname + window.location.search) } catch {}
+                }} />
             </div>
           </div>
         )}
@@ -204,24 +218,7 @@ function VocabDetail({ id, onClose }: { id: string; onClose?: () => void }) {
     <div className="vocabDetail">
       <div className="vocabDetailMedia">
         {item.imageSrc ? (
-          <img
-            src={item.imageSrc}
-            alt={item.word}
-            role="button"
-            tabIndex={0}
-            onClick={() => {
-              try {
-                window.open(item.imageSrc, '_blank')
-              } catch (e) {
-                // ignore
-              }
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                try { window.open(item.imageSrc, '_blank') } catch {}
-              }
-            }}
-          />
+          <img src={item.imageSrc} alt={item.word} />
         ) : <div className="vocabFallbackLarge" />}
       </div>
       <div className="vocabDetailMeta">
