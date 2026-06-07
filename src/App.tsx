@@ -15,12 +15,19 @@ function App() {
       const idFromUrl = hash.replace('#id=', '')
       setModalId(idFromUrl)
       // speak the word when the page is loaded directly with a hash (scan or reload)
-      const found = VOCAB.find((v) => v.id.toString() === idFromUrl)
-      if (found) {
-        try { stopSpeaking() } catch {}
-        try { speakText(found.word, { rate: 0.7, pitch: 1.2, lang: 'en-US' }) } catch {}
-      }
+      const found = VOCAB.find((v) => v.id.toString() === idFromUrl);
+    if (found) {
+      // ĐOẠN NÀY LÀ CÁI MỚI - THAY THẾ CHO CÁI CŨ
+      const playOnFirstInteraction = () => {
+        try { stopSpeaking(); } catch {}
+        try { speakText(found.word, { rate: 0.7, pitch: 1.2, lang: 'en-US' }); } catch {}
+        
+        // Sau khi đọc xong thì gỡ sự kiện để không bị lỗi
+        document.removeEventListener('click', playOnFirstInteraction);
+        document.removeEventListener('touchstart', playOnFirstInteraction);
+      };
     }
+  }
     
     // Lắng nghe thêm sự kiện người dùng bấm "Back" / "Forward" trên trình duyệt
     const handleHashChange = () => {
