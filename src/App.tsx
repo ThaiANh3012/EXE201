@@ -105,11 +105,7 @@ function App() {
               >
                 ✕
               </button>
-              <VocabDetail id={modalId} onClose={() => {
-                  setModalId(null)
-                  try { stopSpeaking() } catch {}
-                  try { window.history.replaceState(null, '', window.location.pathname + window.location.search) } catch {}
-                }} />
+              <VocabDetail id={modalId} />
             </div>
           </div>
         )}
@@ -210,7 +206,7 @@ function VocabCard({ item, onShowCard, compact }: { item: VocabItem; onShowCard?
   )
 }
 
-function VocabDetail({ id, onClose }: { id: string; onClose?: () => void }) {
+function VocabDetail({ id }: { id: string }) {
   const item = VOCAB.find((v) => v.id.toString() === id)
 
   if (!item) return <div>Không tìm thấy từ</div>
