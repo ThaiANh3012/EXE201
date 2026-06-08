@@ -5,6 +5,7 @@ export type VocabItem = {
   ipa?: string
   category?: 'animals' | 'basic'
   imageSrc?: string
+  videoSrc?: string
   example?: string
   storyEn?: string
   storyVi?: string
@@ -18,7 +19,7 @@ export type VocabItem = {
 export const VOCAB: VocabItem[] = [
   { id: 1, word: 'Pencil', meaningVi: 'Bút chì', ipa: "/'pɛn.səl/", category: 'basic', imageSrc: new URL('../assets/Flashcard1.png', import.meta.url).href },
   { id: 2, word: 'Pen', meaningVi: 'Bút mực', ipa: '/pen/', category: 'basic', imageSrc: new URL('../assets/Flashcard2.png', import.meta.url).href },
-  { id: 3, word: 'Eraser', meaningVi: 'Cục tẩy', ipa: "/ɪ'reɪ.zər/", category: 'basic', imageSrc: new URL('../assets/Flashcard3.png', import.meta.url).href },
+  { id: 3, word: 'Eraser', meaningVi: 'Cục tẩy', ipa: "/ɪ'reɪ.zər/", category: 'basic', imageSrc: new URL('../assets/Flashcard3.png', import.meta.url).href , videoSrc: new URL('../assets/hi_chào_các_bạn_mình_là_cục_tẩy.mp4', import.meta.url).href },
   { id: 4, word: 'Notebook', meaningVi: 'Tập vở', ipa: "/'noʊt.bʊk/", category: 'basic', imageSrc: new URL('../assets/Flashcard4.png', import.meta.url).href },
   { id: 5, word: 'Ruler', meaningVi: 'Thước kẻ', ipa: "/'ru:.lər/", category: 'basic', imageSrc: new URL('../assets/Flashcard5.png', import.meta.url).href },
   { id: 6, word: 'Book', meaningVi: 'Sách', ipa: '/bʊk/', category: 'basic', imageSrc: new URL('../assets/Flashcard6.png', import.meta.url).href },

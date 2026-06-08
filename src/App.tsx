@@ -212,28 +212,40 @@ function VocabCard({ item, onShowCard, compact }: { item: VocabItem; onShowCard?
 
 function VocabDetail({ id, onClose }: { id: string; onClose?: () => void }) {
   const item = VOCAB.find((v) => v.id.toString() === id)
-  useEffect(() => {
-    if (!item) return
-    // speak when opening the detail
-    speakText(item.word, { rate: 0.7, pitch: 1.2, lang: 'en-US' })
-    return () => stopSpeaking()
-  }, [id])
 
   if (!item) return <div>Không tìm thấy từ</div>
 
   return (
     <div className="vocabDetail">
+      {/* Vẫn giữ nguyên cột ảnh bên trái */}
       <div className="vocabDetailMedia">
         {item.imageSrc ? (
           <img src={item.imageSrc} alt={item.word} />
-        ) : <div className="vocabFallbackLarge" />}
+        ) : (
+          <div className="vocabFallbackLarge" />
+        )}
       </div>
+      
+      {/* Cột thông tin bên phải */}
       <div className="vocabDetailMeta">
-        <h2 onClick={() => { onClose?.(); }}>{item.word}</h2>
+        <h2>{item.word}</h2>
         {item.ipa && <p className="vocabIpa">{item.ipa}</p>}
         <p className="vocabMeaning">{item.meaningVi}</p>
+
+        {/* Video nằm ở đây, nhỏ gọn ngay trên nút Play */}
+        {item.videoSrc && (
+          <video 
+            src={item.videoSrc} 
+            controls 
+            playsInline
+            className="vocabVideoCompact"
+          />
+        )}
+        
         <div className="vocabDetailActions">
-          <button onClick={() => speakText(item.word, { rate: 0.7, pitch: 1.2, lang: 'en-US' })}>🔊 Play</button>
+          <button onClick={() => speakText(item.word, { rate: 0.7, pitch: 1.2, lang: 'en-US' })}>
+            🔊 Play
+          </button>
         </div>
 
         <div className="vocabDetailQR">
