@@ -25,7 +25,7 @@ export const VOCAB: VocabItem[] = [
   { id: 6, word: 'Book', meaningVi: 'Sách', ipa: '/bʊk/', category: 'basic', imageSrc: new URL('../assets/Flashcard6.png', import.meta.url).href },
   { id: 7, word: 'Notebook Label', meaningVi: 'Nhãn vở', ipa: "/'noʊt.bʊk 'leɪ.bəl/", category: 'basic', imageSrc: new URL('../assets/Flashcard7.png', import.meta.url).href },
   { id: 8, word: 'Backpack', meaningVi: 'Ba lô', ipa: "/'bæk.pæk/", category: 'basic', imageSrc: new URL('../assets/Flashcard8.png', import.meta.url).href },
-  { id: 9, word: 'Pencil case', meaningVi: 'Hộp bút', ipa: "/'pen.sl keɪs/", category: 'basic', imageSrc: new URL('../assets/Flashcard9.png', import.meta.url).href },
+  { id: 9, word: 'Pencil case', meaningVi: 'Hộp bút', ipa: "/ˈpensəl keɪs/", category: 'basic', imageSrc: new URL('../assets/Flashcard9.png', import.meta.url).href },
   { id: 10, word: 'Marker', meaningVi: 'Bút lông', ipa: "/'mɑ:.kə/", category: 'basic', imageSrc: new URL('../assets/Flashcard10.png', import.meta.url).href },
   { id: 11, word: 'Watercolor', meaningVi: 'Màu nước', ipa: "/'wɔ:tə.kʌl.ə/", category: 'basic', imageSrc: new URL('../assets/Flashcard11.png', import.meta.url).href },
   { id: 12, word: 'Highlighter', meaningVi: 'Bút dạ quang', ipa: "/'haɪ.laɪ.tər/", category: 'basic', imageSrc: new URL('../assets/Flashcard12.png', import.meta.url).href },

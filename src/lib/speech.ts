@@ -17,7 +17,7 @@ export function speakText(text: string, opts: SpeakOptions = {}) {
   // Try to pick a friendly voice if available
   try {
     const voices = synth.getVoices() || []
-    const preferFemaleByName = (v: SpeechSynthesisVoice) => /natural|google|samantha|zira/i.test(v.name || '');
+    const preferFemaleByName = (v: SpeechSynthesisVoice) => /Google US English/i.test(v.name || '');
 
     // Prefer voices that match requested language (if provided), then prefer female by name.
     const langPrefix = opts.lang ? opts.lang.slice(0, 2).toLowerCase() : null
@@ -39,7 +39,7 @@ export function speakText(text: string, opts: SpeakOptions = {}) {
     const onVoices = () => {
       try {
         const voices2 = synth.getVoices() || []
-        const preferFemaleByName = (v: SpeechSynthesisVoice) => /natural|google|samantha|zira/i.test(v.name || '');
+        const preferFemaleByName = (v: SpeechSynthesisVoice) => /Google US English/i.test(v.name || '');
         const langPrefix = opts.lang ? opts.lang.slice(0, 2).toLowerCase() : null
         let candidates = voices2
         if (langPrefix) {
