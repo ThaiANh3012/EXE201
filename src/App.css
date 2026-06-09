@@ -1,5 +1,9 @@
 /* --- RESET & VARIABLES --- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 :root {
   --primary: #6366f1;
@@ -24,9 +28,15 @@ body {
   line-height: 1.6;
 }
 
-#root { min-height: 100vh; }
+#root {
+  min-height: 100vh;
+}
 
-.shell { max-width: 1400px; margin: auto; padding: 32px 24px; }
+.shell {
+  max-width: 1400px;
+  margin: auto;
+  padding: 32px 24px;
+}
 
 /* --- HERO --- */
 .hero {
@@ -42,13 +52,34 @@ body {
   overflow: hidden;
 }
 
-.heroCopy { display: flex; flex-direction: column; gap: 20px; z-index: 2; }
-.hero h1 { font-size: 3rem; font-weight: 800; }
-.heroArt img { width: 100%; border-radius: var(--radius-xl); transform: rotate(2deg); }
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.heroArt img {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  transform: rotate(2deg);
+}
 
 /* --- GRID --- */
-.content { margin-top: 80px; }
-.vocabGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 32px; }
+.content {
+  margin-top: 80px;
+}
+
+.vocabGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+}
 
 .vocabCard {
   background: var(--card);
@@ -59,85 +90,169 @@ body {
   transition: all 0.3s;
 }
 
-.vocabCard:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
-.vocabMedia { height: 220px; background: #fff; overflow: hidden; }
-.vocabImage { width: 100%; height: 100%; object-fit: contain; cursor: pointer; }
+.vocabCard:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.vocabMedia {
+  height: 220px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.vocabImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
 
 /* --- MODAL --- */
 .modal {
-  position: fixed; inset: 0;
+  position: fixed;
+  inset: 0;
   background: rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(8px);
-  display: flex; justify-content: center; align-items: center;
-  padding: 24px; z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  z-index: 999;
 }
 
 .modalContent {
   background: var(--card);
-  width: 100%; max-width: 1000px;
+  width: 100%;
+  max-width: 1000px;
   border-radius: var(--radius-xl);
-  max-height: 90vh; overflow-y: auto;
+  max-height: 90vh;
+  overflow-y: auto;
   scrollbar-width: none;
 }
 
-.modalContent::-webkit-scrollbar { display: none; }
+.modalContent::-webkit-scrollbar {
+  display: none;
+}
 
 /* --- VOCAB DETAIL --- */
-.vocabDetail { display: grid; grid-template-columns: 1fr 1fr; }
+.vocabDetail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
-.vocabDetailMedia { background: #fff; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--border); }
-.vocabDetailMedia img { width: 100%; height: auto; max-height: 500px; object-fit: contain; padding: 16px; }
+.vocabDetailMedia {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+}
 
-.vocabDetailMeta { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+.vocabDetailMedia img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  padding: 16px;
+}
+
+.vocabDetailMeta {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .vocabVideoCompact {
   width: 100%;
   max-width: 300px;
-  margin: 16px auto; /* 'auto' giúp căn giữa video */
-  display: block;    /* Bắt buộc để margin auto hoạt động */
+  margin: 16px auto;
+  /* 'auto' giúp căn giữa video */
+  display: block;
+  /* Bắt buộc để margin auto hoạt động */
   border-radius: 12px;
   background: #000;
 }
 
 .vocabDetailActions button {
-  border: none; padding: 16px 24px; border-radius: var(--radius-md);
-  background: var(--primary); color: white; cursor: pointer; width: 100%; font-weight: 600;
+  border: none;
+  padding: 16px 24px;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
 }
 
 /* --- MOBILE RESPONSIVE --- */
 @media (max-width: 768px) {
-  .hero { grid-template-columns: 1fr; text-align: center; }
-  .vocabDetail { grid-template-columns: 1fr; }
-  
-  .vocabDetailMedia { border-right: none; border-bottom: 1px solid var(--border); padding: 0; }
-  .vocabDetailMedia img { max-height: 55vh; padding: 0; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
-  
-  .vocabDetailMeta { padding: 24px 20px 40px 20px; align-items: center; text-align: center; }
-  
-  .vocabDetailActions button { border-radius: 100px; padding: 18px; }
-  .vocabVideoCompact { max-width: 100%; }
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .vocabDetail {
+    grid-template-columns: 1fr;
+  }
+
+  .vocabDetailMedia {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+
+  .vocabDetailMedia img {
+    max-height: 55vh;
+    padding: 0;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+
+  .vocabDetailMeta {
+    padding: 24px 20px 40px 20px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .vocabDetailActions button {
+    border-radius: 100px;
+    padding: 18px;
+  }
+
+  .vocabVideoCompact {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
-  .shell { padding: 16px; }
-  .vocabGrid { grid-template-columns: 1fr; }
+  .shell {
+    padding: 16px;
+  }
+
+  .vocabGrid {
+    grid-template-columns: 1fr;
+  }
 }
+
 .modalClose {
   position: absolute;
   top: 16px;
   right: 16px;
-  
+
   /* Tạo hình tròn */
   width: 40px;
   height: 40px;
-  border-radius: 50%; /* Bo tròn 50% tạo hình tròn */
-  
+  border-radius: 50%;
+  /* Bo tròn 50% tạo hình tròn */
+
   /* Căn giữa chữ X */
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   /* Style thẩm mỹ */
-  background:blue;
+  background: blue;
   color: var(--text);
   border: none;
   font-size: 1.2rem;
@@ -146,18 +261,105 @@ body {
   z-index: 100;
   transition: all 0.2s ease;
 }
+
 .vocabDetailQR {
   /* Tăng margin-top để tách hẳn ra khỏi nút Play */
-  margin-top: 48px; 
-  
+  margin-top: 48px;
+
   /* Thêm padding để nội dung bên trong có khoảng thở */
   padding-top: 32px;
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  
+
   /* Đường kẻ phân cách nhẹ nhàng */
   border-top: 1px solid var(--border);
+}
+
+.vpop-brand {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  /* Nền mờ sang trọng */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  /* Bo tròn như viên thuốc */
+
+  color: #e0e7ff;
+  /* Màu sáng nhẹ */
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.section-header-box {
+  text-align: center; /* Căn giữa cho cân đối */
+  margin-bottom: 48px;
+}
+
+.section-header-box .eyebrow {
+  color: var(--primary); /* Màu tím/xanh nổi bật */
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.section-header-box h2 {
+  font-size: 2.5rem;
+  color: var(--text);
+  letter-spacing: -1px;
+}
+
+/* Thêm hiệu ứng gạch chân nhỏ dưới tiêu đề để tăng tính thẩm mỹ */
+.section-header-box h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
+.heroStats {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.heroStats div {
+  flex: 1;
+  padding: 20px;
+  /* Hiệu ứng kính mờ (Glassmorphism) */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.heroStats div:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+}
+
+.heroStats strong {
+  display: block;
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.heroStats span {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
 }
