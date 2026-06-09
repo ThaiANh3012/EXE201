@@ -53,7 +53,7 @@ function App() {
       <header className="hero">
       
         <div className="heroCopy">
-          <div className="vpop-brand">VPopBox</div>
+          <div className="vpop-brand">boopiBox</div>
           <h1>Thẻ học từ vựng thông minh</h1>
           <p>
             Trải nghiệm học từ vựng thế hệ mới: Quét mã QR, xem video minh họa sống động và luyện phát âm chuẩn AI chỉ với một cú chạm.
